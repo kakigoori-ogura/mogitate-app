@@ -1,39 +1,99 @@
-<h1>商品一覧</h1>
-<a href="/items/create">＋ 商品を追加</a>
+<div style="background-color: #f8f8f8; min-height: 100vh; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333;">
 
-<form method="GET" action="/">
+    <header style="background-color: #fff; padding: 8px 20px; border-bottom: 1px solid #eee;">
+        <h1 style="color: #f0ad4e; font-family: 'Hiragino Mincho ProN', 'serif'; font-size: 0.9rem; margin: 0; font-weight: normal;">
+            mogitate
+        </h1>
+    </header>
 
-    <input type="text" name="keyword" placeholder="商品名で検索">
+    <div style="display: flex; gap: 40px; padding: 30px 20px; max-width: 1000px; margin: 0 auto;">
 
-    <select name="sort">
-        <option value="">並び替え</option>
-        <option value="asc">価格が安い順</option>
-        <option value="desc">価格が高い順</option>
-    </select>
+        <aside style="width: 200px; flex-shrink: 0;">
+            <h2 style="font-size: 1.1rem; margin: 0 0 20px 0; font-weight: bold;">商品一覧</h2>
+            
+            <form method="GET" action="/" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="text" name="keyword" placeholder="商品名で検索" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
 
-    <button type="submit">検索</button>
+                <div>
+                    <label style="font-size: 0.75rem; color: #888;">価格順で表示</label>
+                    <select name="sort" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-top: 5px; background: #fff;">
+                        <option value="">選択してください</option>
+                        <option value="asc">価格が安い順</option>
+                        <option value="desc">価格が高い順</option>
+                    </select>
+                </div>
 
-</form>
+                <button type="submit" style="background-color: #f0ad4e; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">
+                    検索
+                </button>
+            </form>
+        </aside>
 
-<ul>
-    @foreach ($items as $item)
-    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-    <img src="{{ asset('storage/' . $item->image) }}" width="150">
+<main style="flex: 1;">
+    <div style="text-align: right; margin-bottom: 20px;">
+        <a href="/items/create" style="background-color: #f0ad4e; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 0.8rem;">
+            ＋ 商品を追加
+        </a>
+    </div>
 
-    <p>
-    <a href="/items/{{ $item->id }}">
-        {{ $item->name }}
-    </a>
-    </p>
-    <p>{{ $item->price }}円</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        @foreach ($items as $item)
+        <a href="/items/{{ $item->id }}" style="text-decoration: none; color: inherit; display: block;">
+            <div style="background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <img src="{{ asset('storage/' . $item->image) }}" style="width: 100%; height: 120px; object-fit: cover;">
+                <div style="padding: 10px;">
+                    <p style="margin: 0; font-size: 0.85rem;">{{ $item->name }}</p>
+                    <p style="margin: 5px 0 0; font-weight: bold; text-align: right; font-size: 0.9rem;">
+                        ¥{{ number_format($item->price) }}
+                    </p>
+                </div>
+            </div>
+        </a>
+        @endforeach
+    </div> 
+    <div class="pagination-wrapper" style="margin-top: 30px;">
+        {{ $items->links('pagination::bootstrap-4') }} 
+    </div>
+</main>
+<style>
+    /* 下のでかい矢印や文字を消して、丸い数字だけにする魔法 */
+    
+    /* 全体を中央に寄せる */
+    .pagination-wrapper .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 8px;
+    }
 
+    /* 数字の入る丸いデザイン */
+    .pagination-wrapper .page-item .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50% !important; /* 強制的に丸くする */
+        border: none;
+        background-color: transparent;
+        color: #666;
+        font-size: 0.8rem;
+    }
 
-    <a href="/items/{{ $item->id }}/edit">編集</a>
+    /* 今選んでいるページの黄色い丸 */
+    .pagination-wrapper .page-item.active .page-link {
+        background-color: #f0ad4e !important;
+        color: white !important;
+    }
 
-    <form action="/items/{{ $item->id }}/delete" method="POST" style="width:200px; display:inline-block; vertical-align:top;">
-        @csrf
-        <button type="submit">削除</button>
-    </form>
+    /* 不要な「Next/Previous」などの文字や矢印を完全に隠す */
+    .pagination-wrapper .page-item:first-child,
+    .pagination-wrapper .page-item:last-child,
+    .pagination-wrapper svg {
+        display: none !important;
+    }
+</style>
+            </div>
+        </main>
+    </div>
 </div>
-    @endforeach
-</ul>
