@@ -14,3 +14,5 @@ Route::get('/items/{id}/edit', [ItemController::class, 'edit']);
 Route::post('/items/{id}', [ItemController::class, 'update']);
 
 Route::post('/items/{id}/delete', [ItemController::class, 'destroy']);
+
+Route::get('/items/{id}', [ItemController::class, 'show']);

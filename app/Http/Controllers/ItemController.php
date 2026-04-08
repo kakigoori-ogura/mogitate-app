@@ -8,11 +8,6 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    public function index()
-    {
-        $items = Item::all();
-        return view('items.index', compact('items'));
-    }
     public function create()
 {
     return view('items.create');
@@ -66,9 +61,7 @@ public function store(Request $request)
         'image.required' => '画像を登録してください',
         'image.image' => '画像ファイルをアップロードしてください',
         'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
-
-        'season.required' => '季節を選択してください',
-
+        'season.array' => '季節を選択してください',
         'description.required' => '商品説明を入力してください',
         'description.max' => '120文字以内で入力してください',
     ]);
@@ -80,11 +73,34 @@ public function store(Request $request)
         'name' => $request->name,
         'price' => $request->price,
         'image' => $path,
-        'season' => $request->season,
+        'season' => implode(',', $request->season),
         'description' => $request->description,
     ]);
 
     // リダイレクト
     return redirect('/');
+}
+public function show($id)
+{
+    $item = Item::find($id);
+    return view('items.show', compact('item'));
+}
+public function index(Request $request)
+{
+    $query = Item::query();
+
+    //  検索（商品名）
+    if ($request->keyword) {
+        $query->where('name', 'like', '%' . $request->keyword . '%');
+    }
+
+    //  並び替え（価格）
+    if ($request->sort) {
+        $query->orderBy('price', $request->sort);
+    }
+
+    $items = $query->get();
+
+    return view('items.index', compact('items'));
 }
 }

@@ -5,7 +5,7 @@
 
     <div>
         <label>商品名</label>
-        <input type="text" name="name">
+        <input type="text" name="name" value="{{ old('name') }}">
         @error('name')
             <p>{{ $message }}</p>
         @enderror
@@ -13,7 +13,7 @@
 
     <div>
         <label>価格</label>
-        <input type="text" name="price">
+        <input type="text" name="price" value="{{ old('price') }}">
         @error('price')
             <p>{{ $message }}</p>
         @enderror
@@ -28,22 +28,20 @@
     </div>
 
     <div>
-        <label>季節</label>
-        <select name="season">
-            <option value="">選択してください</option>
-            <option value="春">春</option>
-            <option value="夏">夏</option>
-            <option value="秋">秋</option>
-            <option value="冬">冬</option>
-        </select>
-        @error('season')
-            <p>{{ $message }}</p>
-        @enderror
-    </div>
+        <label>季節</label><br>
+</div>
+    <input type="checkbox" name="season[]" value="春" {{ in_array('春', old('season', [])) ? 'checked' : '' }}> 春
+    <input type="checkbox" name="season[]" value="夏" {{ in_array('夏', old('season', [])) ? 'checked' : '' }}> 夏
+    <input type="checkbox" name="season[]" value="秋" {{ in_array('秋', old('season', [])) ? 'checked' : '' }}> 秋
+    <input type="checkbox" name="season[]" value="冬" {{ in_array('冬', old('season', [])) ? 'checked' : '' }}> 冬
 
+    @error('season')
+        <p>{{ $message }}</p>
+    @enderror
+</div>
     <div>
         <label>商品説明</label>
-        <textarea name="description"></textarea>
+        <textarea name="description">{{ old('description') }}</textarea>
         @error('description')
             <p>{{ $message }}</p>
         @enderror
@@ -51,3 +49,4 @@
 
     <button type="submit">登録</button>
 </form>
+<a href="/">一覧に戻る</a>
