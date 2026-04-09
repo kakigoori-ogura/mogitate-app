@@ -19,7 +19,13 @@ docker compose exec app php artisan db:seed
 
 ##ER図
 
+![ER図](public/images/er-diagram.png)
+
 ## URL
 
 - 開発環境：http://localhost
-  http://localhost/items/create
+- 商品一覧：http://localhost/items
+- 商品登録：http://localhost/items/create
+- 商品詳細：http://localhost/items/{id}
+- 商品編集：http://localhost/items/{id}/edit  
+  ※ {id} には商品IDが入ります（例：/items/1）
