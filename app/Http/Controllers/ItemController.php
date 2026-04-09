@@ -79,7 +79,7 @@ public function store(Request $request)
 
         'image.required' => '画像を登録してください',
         'image.image' => '画像ファイルをアップロードしてください',
-        'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+        'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください','season.required' => '季節を選択してください',
         'season.array' => '季節を選択してください',
         'description.required' => '商品説明を入力してください',
         'description.max' => '120文字以内で入力してください',
@@ -118,8 +118,14 @@ public function index(Request $request)
         $query->orderBy('price', $request->sort);
     }
 
-    $items = Item::paginate(6);
+$items = $query->paginate(6);
 
     return view('items.index', compact('items'));
+}
+public function destroy($id)
+{
+    $item = Item::find($id);
+    $item->delete();
+    return redirect('/');
 }
 }

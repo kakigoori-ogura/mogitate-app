@@ -52,11 +52,10 @@
         @endforeach
     </div> 
     <div class="pagination-wrapper" style="margin-top: 30px;">
-        {{ $items->links('pagination::bootstrap-4') }} 
-    </div>
+{{ $items->appends(request()->query())->links('pagination::bootstrap-4') }}
+</div>
 </main>
 <style>
-    /* 下のでかい矢印や文字を消して、丸い数字だけにする魔法 */
     
     /* 全体を中央に寄せる */
     .pagination-wrapper .pagination {

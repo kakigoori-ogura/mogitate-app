@@ -28,13 +28,13 @@
                     <p style="line-height: 1.6; color: #666;">{{ $item->description }}</p>
                 </div>
 
-                <div style="display: flex; gap: 15px; margin-top: 40px;">
+                <div style="align-items: center; display: flex; gap: 15px; margin-top: 40px;">
                     <a href="/items/{{ $item->id }}/edit" style="background-color: #f0ad4e; color: white; padding: 10px 30px; text-decoration: none; border-radius: 4px; font-weight: bold;">
                         編集
                     </a>
-                    <form action="/items/{{ $item->id }}/delete" method="POST" style="margin: 0;">
+                    <form action="/items/{{ $item->id }}/delete" method="POST" style="margin: 0;display: inline-block; vertical-align: middle;">
                         @csrf
-                        <button type="submit" style="background-color: #dadada; color: #333; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+                        <button type="submit" style="background-color: #dadada; color: #333; border: none; display: inline-block; padding: 13px 30px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; font-weight: bold;">
                             🗑削除
                         </button>
                     </form>

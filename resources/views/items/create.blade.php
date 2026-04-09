@@ -9,7 +9,7 @@
     <div style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
         <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 25px; color: #444; text-align: left;">商品登録</h2>
 
-        <div style="background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
             
             <form action="/items" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 20px;">
                 @csrf
