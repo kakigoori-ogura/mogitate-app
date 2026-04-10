@@ -11,7 +11,7 @@
             <a href="/" style="color: #f0ad4e; text-decoration: none;">商品一覧</a> ＞ {{ $item->name }}
         </p>
 
-        <div style="background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
             
             <form action="/items/{{ $item->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
