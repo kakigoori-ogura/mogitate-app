@@ -25,8 +25,7 @@ docker compose exec app php artisan db:seed
 
 ## URL
 
-- 開発環境：http://localhost
-- 商品一覧：http://localhost/items
+- 開発一覧：http://localhost
 - 商品登録：http://localhost/items/create
 - 商品詳細：http://localhost/items/{id}
 - 商品編集：http://localhost/items/{id}/edit

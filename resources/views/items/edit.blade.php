@@ -8,7 +8,7 @@
 
     <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
         <p style="margin-bottom: 20px; font-size: 0.9rem;">
-            <a href="/" style="color: #f0ad4e; text-decoration: none;">商品一覧</a> ＞ {{ $item->name }}
+            <a href="/" style="color: #f0ad4e; text-decoration: none;">商品一覧</a> > {{ $item->name }}
         </p>
 
         <div style="padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">

@@ -11,7 +11,7 @@
         <aside style="width: 200px; flex-shrink: 0;">
             <h2 style="font-size: 1.1rem; margin: 0 0 20px 0; font-weight: bold;">商品一覧</h2>
             
-            <form method="GET" action="/" style="display: flex; flex-direction: column; gap: 15px;">
+            <form method="GET" action="/items" style="display: flex; flex-direction: column; gap: 15px;">
                 <input type="text" name="keyword" placeholder="商品名で検索" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
 
                 <div>
@@ -57,7 +57,6 @@
 </main>
 <style>
     
-    /* 全体を中央に寄せる */
     .pagination-wrapper .pagination {
         display: flex;
         justify-content: center;
@@ -65,27 +64,24 @@
         gap: 8px;
     }
 
-    /* 数字の入る丸いデザイン */
     .pagination-wrapper .page-item .page-link {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 32px;
         height: 32px;
-        border-radius: 50% !important; /* 強制的に丸くする */
+        border-radius: 50% !important;
         border: none;
         background-color: transparent;
         color: #666;
         font-size: 0.8rem;
     }
 
-    /* 今選んでいるページの黄色い丸 */
     .pagination-wrapper .page-item.active .page-link {
         background-color: #f0ad4e !important;
         color: white !important;
     }
 
-    /* 不要な「Next/Previous」などの文字や矢印を完全に隠す */
     .pagination-wrapper .page-item:first-child,
     .pagination-wrapper .page-item:last-child,
     .pagination-wrapper svg {

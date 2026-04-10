@@ -45,7 +45,6 @@ public function update(Request $request, $id)
 
     $item = Item::find($id);
 
-    // 画像更新（あれば）
     if ($request->hasFile('image')) {
         $path = $request->file('image')->store('images', 'public');
         $item->image = $path;
@@ -62,12 +61,11 @@ public function update(Request $request, $id)
 }
 public function store(Request $request)
 {
-    // バリデーション
     $request->validate([
         'name' => 'required',
         'price' => 'required|numeric|min:0|max:10000',
         'image' => 'required|image|mimes:png,jpeg',
-        'season' => 'required',
+        'season' => 'required|array',
         'description' => 'required|max:120',
     ], [
         'name.required' => '商品名を入力してください',
@@ -84,10 +82,8 @@ public function store(Request $request)
         'description.required' => '商品説明を入力してください',
         'description.max' => '120文字以内で入力してください',
     ]);
-    // 画像保存
     $path = $request->file('image')->store('images', 'public');
 
-    // DB保存
     \App\Models\Item::create([
         'name' => $request->name,
         'price' => $request->price,
@@ -96,7 +92,6 @@ public function store(Request $request)
         'description' => $request->description,
     ]);
 
-    // リダイレクト
     return redirect('/');
 }
 public function show($id)
@@ -108,12 +103,10 @@ public function index(Request $request)
 {
     $query = Item::query();
 
-    //  検索（商品名）
     if ($request->keyword) {
         $query->where('name', 'like', '%' . $request->keyword . '%');
     }
 
-    //  並び替え（価格）
     if ($request->sort) {
         $query->orderBy('price', $request->sort);
     }
