@@ -1,17 +1,19 @@
 #「もぎたて」商品管理アプリ
 
-##環境構築
+## 環境構築
 
 ```bash
+git clone git@github.com:kakigoori-ogura/mogitate-app.git
 cd mogitate-app
-docker compose up -d
-docker compose exec app composer install
+composer install
 cp .env.example .env
-docker compose exec app php artisan key:generate
+php artisan key:generate
+docker compose up -d
 docker compose exec app php artisan migrate
 docker compose exec app php artisan db:seed
+```
 
-##使用技術
+## 使用技術
 
 - PHP 8.5.3
 - Laravel 12.56.0
@@ -19,7 +21,7 @@ docker compose exec app php artisan db:seed
 - Docker 28.3.2
 - Docker Compose
 
-##ER図
+## ER図
 
 ![ER図](public/images/er-diagram.png)
 
@@ -30,4 +32,7 @@ docker compose exec app php artisan db:seed
 - 商品詳細：http://localhost/items/{id}
 - 商品編集：http://localhost/items/{id}/edit
   ※ {id} には商品IDが入ります（例：/items/1）
+
+```
+
 ```
